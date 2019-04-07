@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+F:/Clion/ASSIGNMENT_2_NWEN_CPP/editor2.cc
+iostream
+-
+editor2.hh
+F:/Clion/ASSIGNMENT_2_NWEN_CPP/editor2.hh
+cstring
+-
+
+F:/Clion/ASSIGNMENT_2_NWEN_CPP/editor2.hh
+string
+-
+

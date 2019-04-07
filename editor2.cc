@@ -4,30 +4,18 @@
 
 using namespace editor2;
 
-int main() {
-    char buffer[] = "Alice\topened the\n\ndoor\t and   found that it\n\n led into\n";
-
-    std::cout << "Buffer contents: " << buffer << std::endl;
-    int r = EditorUtilities::countWords(buffer, sizeof(buffer));
-    std::cout << "Output of EditorUtilities::countWords(): " << r << std::endl;
-    std::cout << "Actual number of words in buffer       : 10" << std::endl;
-}
-
 int EditorUtilities::countWords(char *editing_buffer, int buffer_size) {
     int number_of_words = 0;
     bool in_word = false;
     for (char *i = editing_buffer + sizeof(char); i < editing_buffer + buffer_size; i = i + sizeof(char)) {
-        if (!(*i == ' ' || *i == '\t' || *i == '\n' || *i == '\v' || *i == '\f' || *i == '\r')) {
-            if ((*(i - sizeof(char)) == ' ' || *(i - sizeof(char)) == '\t' || *(i - sizeof(char)) == '\n' ||
-                 *(i - sizeof(char)) == '\v' || *(i - sizeof(char)) == '\f' || *(i - sizeof(char)) == '\r')) {
+        if (!isspace(*i)) {
+            if (isspace(*(i-1))) {
                 number_of_words++;
                 in_word = true;
-            } else if ((*(i + sizeof(char)) == ' ' || *(i + sizeof(char)) == '\t' || *(i + sizeof(char)) == '\n' ||
-                        *(i + sizeof(char)) == '\v' || *(i + sizeof(char)) == '\f' || *(i + sizeof(char)) == '\r') &&
-                       !in_word) {
+            } else if (isspace(*(i+1)) && !in_word) {
                 number_of_words++;
             }
-        } else if ((*i == ' ' || *i == '\t' || *i == '\n' || *i == '\v' || *i == '\f' || *i == '\r') && in_word) {
+        } else if (isspace(*i) && in_word) {
             in_word = false;
         }
     }
